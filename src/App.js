@@ -30,12 +30,12 @@ function App() {
   
 
   return (
-    <div className={'App ${theme}'} style={{padding:20}}>
-      <h1>Task Manager Lite</h1>
-      <button onClick={toggleTheme} >Toggle Theme</button>
+    <div className={`App ${theme} p-8 rounded-lg bg-gray-100 font-sans`}>
+      <h1 className="text-2xl font-bold mb-4">Task Manager Lite</h1>
+      <button onClick={toggleTheme} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Toggle Theme</button>
       <TaskInput dispatch={dispatch} />
       <TaskList tasks={tasks} dispatch={dispatch} />
-      <hr />
+      <hr className="my-4" />
       <p>Completed Tasks: {completedCount}</p>
       
     </div>

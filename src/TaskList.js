@@ -7,14 +7,14 @@ function TaskList({ tasks, dispatch }) {
   );
 
   return (
-    <ul>
+    <ul className="list-none">
       {tasks.map(task => (
         <li
           key={task.id}
-          style={{ textDecoration: task.done ? 'line-through' : 'none' }}
+          className="flex items-center justify-between mb-2 rounded-lg bg-white shadow-md p-2"
         >
-          <span>{task.text}</span>
-          <button onClick={() => toggleTask(task.id)}>
+          <span className={task.done ? 'line-through' : ''}>{task.text}</span>
+          <button onClick={() => toggleTask(task.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
             {task.done ? 'Undo' : 'Done'}
           </button>
         </li>
