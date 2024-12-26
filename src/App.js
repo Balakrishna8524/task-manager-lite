@@ -2,6 +2,8 @@ import React, {useReducer, useMemo, useContext} from 'react';
 import {ThemeContext, ThemeProvider} from './ThemeContext'
 import TaskInput from './TaskInput';
 import TaskList from './TaskList';
+import './App.css';
+import './index.css'; 
 
 const initialState = [];
 
