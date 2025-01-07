@@ -50,7 +50,6 @@ Here are some screenshots of the application:
 ### Dark Theme
 ![Dark Theme](public/Screenshot_2.png)
 
-> **Note**: Ensure the screenshots are placed in the `public/screenshots` directory with the filenames `light-theme.png` and `dark-theme.png`.
 
 ## Available Scripts
 
