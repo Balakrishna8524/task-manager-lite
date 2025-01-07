@@ -1,71 +1,61 @@
 // Importing necessary modules and components
 import React, { useReducer, useMemo, useContext } from 'react';
-import { ThemeContext, ThemeProvider } from './ThemeContext'; // Importing theme context for managing light/dark mode
-import TaskInput from './TaskInput'; // Component for adding new tasks
-import TaskList from './TaskList'; // Component for displaying the list of tasks
-import './index.css'; // Global styles for the application
+import { ThemeContext, ThemeProvider } from './ThemeContext';
+import TaskInput from './TaskInput';
+import TaskList from './TaskList';
+import { Container, Typography, Button, Divider } from '@mui/material';
 
-// Initial state for the task reducer (an empty array of tasks)
 const initialState = [];
 
-// Reducer function to manage task-related actions
 function taskReducer(state, action) {
   switch (action.type) {
-    case 'add': // Adds a new task to the state
+    case 'add':
       return [...state, { id: Date.now(), text: action.payload, done: false }];
-    case 'toggle': // Toggles the 'done' status of a task
+    case 'toggle':
       return state.map(task =>
         task.id === action.payload ? { ...task, done: !task.done } : task
       );
-    default: // Returns the current state if the action type is not recognized
+    default:
       return state;
   }
 }
 
-// Main App component
 function App() {
-  // useReducer hook to manage the tasks state using the taskReducer function
   const [tasks, dispatch] = useReducer(taskReducer, initialState);
-
-  // useContext hook to access the current theme and the function to toggle the theme
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-  // useMemo hook to calculate the number of completed tasks only when the tasks array changes
   const completedCount = useMemo(() => {
     console.log('Calculating completed tasks...');
     return tasks.filter(task => task.done).length;
   }, [tasks]);
 
   return (
-    // Main container with dynamic theme class and styling
-    <div className={`App ${theme} p-8 rounded-lg bg-gray-100 font-sans`}>
-      {/* Application title */}
-      <h1 className="text-2xl font-bold mb-4">Task Manager Lite</h1>
-
-      {/* Button to toggle between light and dark themes */}
-      <button
-        onClick={toggleTheme}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-      >
+    <Container
+      className={`App ${theme}`}
+      style={{
+        padding: '16px',
+        borderRadius: '8px',
+        backgroundColor: '#f5f5f5',
+        fontFamily: 'sans-serif',
+        width: '50%', // Set the width to 50%
+        margin: '0 auto', // Center the container horizontally
+        marginTop: '50px', // Add some space from the top
+      }}
+    >
+      <Typography variant="h4" component="h1" style={{ fontWeight: 'bold', marginBottom: '16px' }}>
+        Task Manager Lite
+      </Typography>
+      <Button variant="contained" color="primary" onClick={toggleTheme} style={{ marginBottom: '16px' }}>
         Toggle Theme
-      </button>
-
-      {/* Task input component for adding new tasks */}
+      </Button>
       <TaskInput dispatch={dispatch} />
-
-      {/* Task list component for displaying tasks */}
       <TaskList tasks={tasks} dispatch={dispatch} />
-
-      {/* Divider */}
-      <hr className="my-4" />
-
-      {/* Display the count of completed tasks */}
-      <p>Completed Tasks: {completedCount}</p>
-    </div>
+      <Divider style={{ margin: '16px 0' }} />
+      <Typography variant="body1">Completed Tasks: {completedCount}</Typography>
+    </Container>
   );
 }
 
-// Wrapper component to provide the ThemeContext to the App component
 export default function WrappedApp() {
   return (
     <ThemeProvider>
