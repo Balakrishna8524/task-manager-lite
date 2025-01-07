@@ -4,6 +4,7 @@ import { ThemeContext, ThemeProvider } from './ThemeContext';
 import TaskInput from './TaskInput';
 import TaskList from './TaskList';
 import { Container, Typography, Button, Divider } from '@mui/material';
+import './App.css'; // Import the CSS file
 
 const initialState = [];
 
@@ -30,29 +31,30 @@ function App() {
   }, [tasks]);
 
   return (
-    <Container
-      className={`App ${theme}`}
-      style={{
-        padding: '16px',
-        borderRadius: '8px',
-        backgroundColor: '#f5f5f5',
-        fontFamily: 'sans-serif',
-        width: '50%', // Set the width to 50%
-        margin: '0 auto', // Center the container horizontally
-        marginTop: '50px', // Add some space from the top
-      }}
-    >
-      <Typography variant="h4" component="h1" style={{ fontWeight: 'bold', marginBottom: '16px' }}>
-        Task Manager Lite
-      </Typography>
-      <Button variant="contained" color="primary" onClick={toggleTheme} style={{ marginBottom: '16px' }}>
-        Toggle Theme
-      </Button>
-      <TaskInput dispatch={dispatch} />
-      <TaskList tasks={tasks} dispatch={dispatch} />
-      <Divider style={{ margin: '16px 0' }} />
-      <Typography variant="body1">Completed Tasks: {completedCount}</Typography>
-    </Container>
+    
+      <Container
+        className={`App ${theme}`}
+        style={{
+          padding: '16px',
+          borderRadius: '8px',
+          backgroundColor: '#f5f5f5',
+          fontFamily: 'sans-serif',
+          width: '50%', // Set the width to 50%
+          margin: '0 auto', // Center the container horizontally
+          marginTop: '50px', // Add some space from the top
+        }}
+      >
+        <Typography variant="h4" component="h1" style={{ fontWeight: 'bold', marginBottom: '16px' }}>
+          Task Manager Lite
+        </Typography>
+        <Button variant="contained" color="primary" onClick={toggleTheme} style={{ marginBottom: '16px' }}>
+          Toggle Theme
+        </Button>
+        <TaskInput dispatch={dispatch} theme={theme} />
+        <TaskList tasks={tasks} dispatch={dispatch} />
+        <Divider style={{ margin: '16px 0' }} />
+        <Typography variant="body1">Completed Tasks: {completedCount}</Typography>
+      </Container>
   );
 }
 
