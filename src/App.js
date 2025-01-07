@@ -3,7 +3,6 @@ import React, { useReducer, useMemo, useContext } from 'react';
 import { ThemeContext, ThemeProvider } from './ThemeContext'; // Importing theme context for managing light/dark mode
 import TaskInput from './TaskInput'; // Component for adding new tasks
 import TaskList from './TaskList'; // Component for displaying the list of tasks
-import './App.css'; // Styling for the App component
 import './index.css'; // Global styles for the application
 
 // Initial state for the task reducer (an empty array of tasks)
